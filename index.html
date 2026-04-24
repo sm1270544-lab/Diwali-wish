@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Diwali Wishes</title>
+
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: black;
+  color: white;
+}
+
+h1 {
+  color: gold;
+  font-size: 40px;
+  margin-top: 20px;
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px gold; }
+  to { text-shadow: 0 0 25px orange; }
+}
+
+input, button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  background: orange;
+  color: white;
+  cursor: pointer;
+}
+
+#output {
+  font-size: 24px;
+  margin-top: 20px;
+  color: yellow;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🪔 Happy Diwali 🪔</h1>
+
+<input type="text" id="name" placeholder="Apna naam likho">
+<br>
+
+<button onclick="generate()">Generate Wish</button>
+
+<div id="output"></div>
+
+<button onclick="share()">WhatsApp Share</button>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function generate() {
+  var name = document.getElementById("name").value;
+  var message = name + " ki taraf se Happy Diwali!";
+  document.getElementById("output").innerText = message;
+
+  // URL me naam add karna (viral trick)
+  var newUrl = window.location.origin + window.location.pathname + "?name=" + encodeURIComponent(name);
+  window.history.pushState({}, "", newUrl);
+}
+
+// Page load pe naam show ho
+window.onload = function() {
+  var params = new URLSearchParams(window.location.search);
+  var name = params.get("name");
+  if (name) {
+    document.getElementById("output").innerText = name + " ki taraf se Happy Diwali!";
+  }
+}
+
+function share() {
+  var currentUrl = window.location.href;
+  var text = "🎉 Special Diwali Wish 🎉\n" + currentUrl;
+  var url = "https://wa.me/?text=" + encodeURIComponent(text);
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
